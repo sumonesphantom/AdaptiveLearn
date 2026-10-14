@@ -1,0 +1,12 @@
+[project]
+name = "ml"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "fastapi>=0.143.1",
+    "numpy<2",
+    "pandas<2.3",
+    "pybkt>=1.4.3",
+    "scikit-learn<1.6",
+    "uvicorn[standard]>=0.54.0",
+]

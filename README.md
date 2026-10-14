@@ -4,6 +4,27 @@ Digital SAT prep (Math + Reading & Writing) where the content is free and person
 
 Full build plan, ML approach and research: [docs/BUILD_PLAN.md](docs/BUILD_PLAN.md)
 
+## Run the POC
+
+Needs: Node 20 + pnpm, Python via `uv`, and [Ollama](https://ollama.com).
+
+```bash
+./start-demo.sh
+# open http://localhost:3000/?ref=skool
+```
+
+| Part | Where | What it does |
+|---|---|---|
+| Web app | `web/` (Next.js 16) | Landing page, diagnostic, results, 90-day plan, practice drills, progress |
+| ML service | `ml/` (FastAPI + pyBKT) | Bayesian Knowledge Tracing: mastery per skill after every answer, weak-skill ranking, score estimate, plan generation |
+| Tutor | Ollama, `qwen2.5:7b-instruct` | Small local LLM that explains mistakes and answers follow-ups. Set `OLLAMA_MODEL=llama3.2:1b` for a faster, weaker model |
+
+Retrain the BKT model: `cd ml && uv run python train.py`. It currently trains on simulated students and checks that pyBKT recovers the true parameters. Swap in real attempt logs once you have them.
+
+**Demo script:** try the sample question on the landing page, take the diagnostic (miss a few on purpose), click *Unlock personalization*, build the plan, hit *Start* on today's first block, answer a question and ask the tutor, then open *Progress*.
+
+POC shortcuts: state lives in the browser's localStorage, payment is a mock toggle, reminders are a preview only, and there are 40 original questions (5 per skill).
+
 ## Business model
 - **Content is free.** Anyone can follow the plain structured curriculum.
 - **Personalization is charged** (pay fee). It covers the diagnostic-driven path, the study plan and progress tracking.

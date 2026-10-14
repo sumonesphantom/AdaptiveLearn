@@ -58,3 +58,7 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 *.swp
+
+# Claude Code skills: installed locally, see .claude/skills/SOURCES.md to reinstall
+.claude/skills/*
+!.claude/skills/SOURCES.md

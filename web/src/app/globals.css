@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/*
+  Palette: an SAT answer sheet.
+  ink      – booklet print, primary text and actions
+  paper    – cool sheet white
+  pencil   – #2 pencil yellow, used only for filled bubbles and the one thing to look at
+  graphite – secondary text
+  rule     – grid and borders
+*/
+:root {
+  --ink: #13233f;
+  --ink-soft: #2b3d5c;
+  --paper: #f7f8fa;
+  --sheet: #ffffff;
+  --pencil: #f5c518;
+  --pencil-deep: #c99a00;
+  --graphite: #566070;
+  --rule: #dfe4ec;
+  --correct: #1d7a4c;
+  --correct-bg: #e6f4ec;
+  --wrong: #b42318;
+  --wrong-bg: #fdecea;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-sheet: var(--sheet);
+  --color-pencil: var(--pencil);
+  --color-pencil-deep: var(--pencil-deep);
+  --color-graphite: var(--graphite);
+  --color-rule: var(--rule);
+  --color-correct: var(--correct);
+  --color-correct-bg: var(--correct-bg);
+  --color-wrong: var(--wrong);
+  --color-wrong-bg: var(--wrong-bg);
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-body);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Faint graph-paper grid, used once in the hero. */
+.graph-paper {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--pencil-deep);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* The one orchestrated moment: a bubble filling in like pencil on paper. */
+@keyframes fill-bubble {
+  from { transform: scale(0.3); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.bubble-fill { animation: fill-bubble 180ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
